@@ -14,8 +14,8 @@ public class HelloController {
     public void add() {
         Polynomial first = new Polynomial(firstField.getText());
         Polynomial second = new Polynomial(secondField.getText());
-        Polynomial result = first.div(second);
-        System.out.println(result.toString());
+        Polynomial[] result = first.div(second);
+        System.out.println(result[0].toString() + " " + result[1].toString());
 
         /*Monomial first = new Monomial(firstField.getText());
         Monomial second = new Monomial(secondField.getText());

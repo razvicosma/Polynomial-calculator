@@ -61,11 +61,23 @@ public class Polynomial {
         }
         return result;
     }
-    public Polynomial div(Polynomial divisor) {
+    public Polynomial[] div(Polynomial divisor) {
         Polynomial dividend = this;
         Polynomial quotient = new Polynomial();
-        return quotient;
+
+        while (!dividend.map.isEmpty()  && dividend.map.firstKey() >= divisor.map.firstKey()) {
+            int currentDegree = dividend.map.firstKey() - divisor.map.firstKey();
+            Monomial leadingDividend = dividend.map.firstEntry().getValue();
+            Monomial leadingDivisor = divisor.map.firstEntry().getValue();
+            Monomial termQuotient = leadingDividend.div(leadingDivisor);
+            Polynomial product = new Polynomial(termQuotient).product(divisor);
+            dividend = dividend.subtract(product);
+            dividend.map.entrySet().removeIf(entry -> entry.getValue().coefficient.floatValue() == 0.0);
+            quotient.map.put(currentDegree, termQuotient);
+        }
+        return new Polynomial[]{quotient, dividend};
     }
+
 
 
     public Polynomial derivate() {
