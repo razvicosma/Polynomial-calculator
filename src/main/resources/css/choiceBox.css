@@ -1,0 +1,28 @@
+.choice-box {
+    -fx-background-color: #666666;
+    -fx-text-fill: #fff;
+}
+
+.choice-box:hover {
+    -fx-background-color: #555555;
+}
+
+.choice-box:focused {
+    -fx-background-color: #555555;
+}
+
+.choice-box .context-menu {
+    -fx-background-color: #666666;
+}
+
+.choice-box .menu-item {
+    -fx-text-fill: #fff;
+}
+
+.choice-box .menu-item:hover {
+    -fx-background-color: #555555;
+}
+
+.choice-box .menu-item:focused {
+    -fx-background-color: #555555;
+}

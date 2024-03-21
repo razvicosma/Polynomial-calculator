@@ -5,46 +5,46 @@ import java.util.TreeMap;
 import java.util.Map;
 
 public class Polynomial {
-    public TreeMap<Integer, Monomial> map;
+    private TreeMap<Integer, Monomial> map;
 
     public Polynomial(TreeMap<Integer, Monomial> map) {
-        this.map = map;
+        this.setMap(map);
     }
     public Polynomial(String string) {
         string= string.replaceAll("-\\s+","-");
         string = string.replaceAll("\\+\\s+","+");
         String[] monomials = string.split("\\s+");
-        this.map = new TreeMap<>(Collections.reverseOrder());
+        this.setMap(new TreeMap<>(Collections.reverseOrder()));
         for(String monomialString : monomials){
             Monomial monomial = new Monomial(monomialString);
-            this.map.put(monomial.degree,monomial);
+            this.getMap().put(monomial.getDegree(),monomial);
         }
     }
     public Polynomial() {
-        this.map = new TreeMap<>(Collections.reverseOrder());
+        this.setMap(new TreeMap<>(Collections.reverseOrder()));
     }
     public Polynomial(Monomial monomial) {
-        this.map = new TreeMap<>(Collections.reverseOrder());
-        this.map.put(monomial.degree,monomial);
+        this.setMap(new TreeMap<>(Collections.reverseOrder()));
+        this.getMap().put(monomial.getDegree(),monomial);
     }
 
     public Polynomial add(Polynomial second){
         Polynomial result = new Polynomial();
-        for(Map.Entry<Integer,Monomial> entry : this.map.entrySet()){
-                Monomial monomial = entry.getValue().add(second.map.get(entry.getKey()));
-                result.map.put(monomial.degree,monomial);
+        for(Map.Entry<Integer,Monomial> entry : this.getMap().entrySet()){
+                Monomial monomial = entry.getValue().add(second.getMap().get(entry.getKey()));
+                result.getMap().put(monomial.getDegree(),monomial);
         }
-        for(Map.Entry<Integer,Monomial> entry : second.map.entrySet()){
-            if(!this.map.containsKey(entry.getKey())) {
-                result.map.put(entry.getKey(),entry.getValue());
+        for(Map.Entry<Integer,Monomial> entry : second.getMap().entrySet()){
+            if(!this.getMap().containsKey(entry.getKey())) {
+                result.getMap().put(entry.getKey(),entry.getValue());
             }
         }
         return result;
     }
     public Polynomial invert() {
         Polynomial inverted = new Polynomial();
-        for (Map.Entry<Integer,Monomial> entry : this.map.entrySet()) {
-            inverted.map.put(entry.getKey(), entry.getValue().invert());
+        for (Map.Entry<Integer,Monomial> entry : this.getMap().entrySet()) {
+            inverted.getMap().put(entry.getKey(), entry.getValue().invert());
         }
         return inverted;
     }
@@ -53,27 +53,27 @@ public class Polynomial {
     }
     public Polynomial product(Polynomial second){
         Polynomial result = new Polynomial();
-        for(Map.Entry<Integer,Monomial> entry : this.map.entrySet()){
-            for(Map.Entry<Integer,Monomial> entry2 : second.map.entrySet()) {
+        for(Map.Entry<Integer,Monomial> entry : this.getMap().entrySet()){
+            for(Map.Entry<Integer,Monomial> entry2 : second.getMap().entrySet()) {
                 Monomial monomial = entry.getValue().product(entry2.getValue());
                 result = result.add(new Polynomial(monomial));
             }
         }
         return result;
     }
-    public Polynomial[] div(Polynomial divisor) {
+    public Polynomial[] div(Polynomial divisor) throws ArithmeticException{
         Polynomial dividend = this;
         Polynomial quotient = new Polynomial();
-
-        while (!dividend.map.isEmpty()  && dividend.map.firstKey() >= divisor.map.firstKey()) {
-            int currentDegree = dividend.map.firstKey() - divisor.map.firstKey();
-            Monomial leadingDividend = dividend.map.firstEntry().getValue();
-            Monomial leadingDivisor = divisor.map.firstEntry().getValue();
+        if(divisor.getMap().firstKey() > dividend.getMap().firstKey()) throw new ArithmeticException("Second polynomial is greater that the first");
+        while (!dividend.getMap().isEmpty()  && dividend.getMap().firstKey() >= divisor.getMap().firstKey()) {
+            int currentDegree = dividend.getMap().firstKey() - divisor.getMap().firstKey();
+            Monomial leadingDividend = dividend.getMap().firstEntry().getValue();
+            Monomial leadingDivisor = divisor.getMap().firstEntry().getValue();
             Monomial termQuotient = leadingDividend.div(leadingDivisor);
             Polynomial product = new Polynomial(termQuotient).product(divisor);
             dividend = dividend.subtract(product);
-            dividend.map.entrySet().removeIf(entry -> entry.getValue().coefficient.floatValue() == 0.0);
-            quotient.map.put(currentDegree, termQuotient);
+            dividend.getMap().entrySet().removeIf(entry -> entry.getValue().getCoefficient().floatValue() == 0.0);
+            quotient.getMap().put(currentDegree, termQuotient);
         }
         return new Polynomial[]{quotient, dividend};
     }
@@ -82,15 +82,15 @@ public class Polynomial {
 
     public Polynomial derivate() {
         Polynomial result = new Polynomial();
-        for (Map.Entry<Integer,Monomial> entry : this.map.entrySet()) {
-            result.map.put(entry.getKey(), entry.getValue().derivate());
+        for (Map.Entry<Integer,Monomial> entry : this.getMap().entrySet()) {
+            result.getMap().put(entry.getKey(), entry.getValue().derivate());
         }
         return result;
     }
     public Polynomial integrate() {
         Polynomial result = new Polynomial();
-        for (Map.Entry<Integer,Monomial> entry : this.map.entrySet()) {
-            result.map.put(entry.getKey(), entry.getValue().integrate());
+        for (Map.Entry<Integer,Monomial> entry : this.getMap().entrySet()) {
+            result.getMap().put(entry.getKey(), entry.getValue().integrate());
         }
         return result;
     }
@@ -98,7 +98,7 @@ public class Polynomial {
     public String toString(){
         StringBuilder stringBuilder = new StringBuilder();
         int first = 0;
-    for(Map.Entry<Integer, Monomial> entry : this.map.entrySet()){
+    for(Map.Entry<Integer, Monomial> entry : this.getMap().entrySet()){
         if(first == 0) {
             stringBuilder.append(entry.getValue().toString().replaceAll("\\+\\s+","").replaceAll("-\\s+","-"));
             first = 1;
@@ -106,6 +106,15 @@ public class Polynomial {
             stringBuilder.append(entry.getValue().toString());
         }
     }
-    return stringBuilder.toString();
+    if (stringBuilder.toString().isEmpty()) return "0";
+    else return stringBuilder.toString();
+    }
+
+    public TreeMap<Integer, Monomial> getMap() {
+        return map;
+    }
+
+    public void setMap(TreeMap<Integer, Monomial> map) {
+        this.map = map;
     }
 }

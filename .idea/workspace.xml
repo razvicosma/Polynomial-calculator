@@ -5,10 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bebc79e-91ee-4951-9f8c-1933730122d6" name="Changes" comment="first">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/polynomial/controller/CalculatorController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/polynomial/calculator-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/choiceBox.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/fields.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/polynomial/controller/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/polynomial/controller/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/polynomial/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/polynomial/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/polynomial/controller/HelloController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/polynomial/model/Monomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/polynomial/model/Monomial.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/polynomial/model/Polynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/polynomial/model/Polynomial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/polynomial/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/MonomialTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PolynomialTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +84,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710922126423</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="first">
+      <option name="closed" value="true" />
+      <created>1710975919683</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1710975919683</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
