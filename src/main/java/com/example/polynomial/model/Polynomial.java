@@ -64,7 +64,7 @@ public class Polynomial {
     public Polynomial[] div(Polynomial divisor) throws ArithmeticException{
         Polynomial dividend = this;
         Polynomial quotient = new Polynomial();
-        if(divisor.getMap().firstKey() > dividend.getMap().firstKey()) throw new ArithmeticException("Second polynomial is greater that the first");
+        if(divisor.getMap().firstKey() > dividend.getMap().firstKey()) throw new ArithmeticException("Second polynomial is greater than the first");
         while (!dividend.getMap().isEmpty()  && dividend.getMap().firstKey() >= divisor.getMap().firstKey()) {
             int currentDegree = dividend.getMap().firstKey() - divisor.getMap().firstKey();
             Monomial leadingDividend = dividend.getMap().firstEntry().getValue();
